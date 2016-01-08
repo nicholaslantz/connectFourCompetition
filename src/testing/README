@@ -1,0 +1,3 @@
+At the moment, the tests just contain some primitive code. Copy the file to the
+'src' directory, rename it to main.cpp and compile it and the required cpp
+files and observe the output.

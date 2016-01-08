@@ -3,20 +3,30 @@
  *
  */
 
+#include "board.hpp"
+
+using namespace std;
+
 Board::Board() {
-    gameBoard = gameBoard<char>(NROWS, NCOLS, ',');
-    numEmptyTilesInCols = Vector<int>(NCOLS, gameBoard.height());
+    gameBoard = Grid<char>(NROWS, NCOLS);
+    numEmptyTilesInCols = Vector<int>(NCOLS, gameBoard.numRows());
     bool safeMode = true;
+
+    for (int i = 0; i < gameBoard.numRows(); i++) {
+        for (int j = 0; j < gameBoard.numCols(); j++) {
+            gameBoard[i][j] = '.';
+        }
+    }
 }
 
 void Board::AddPieceToCol(char piece, int col) {
 
-    if (col < 0 || col > gameBoard.width() - 1) {
+    if (col < 0 || col > gameBoard.numCols() - 1) {
         cerr << "Error: Out of Bounds" << endl;
         cerr << "Make sure col modified is between 0 and 6 inclusive" << endl;
     }
 
-    int row = gameBoard.height() - numEmptyTilesInCols[col] - 1;
+    int row = numEmptyTilesInCols[col] - 1;
     numEmptyTilesInCols[col]--;
 
     gameBoard[row][col] = piece;
@@ -28,7 +38,7 @@ void Board::AddPieceToCol(char piece, int col) {
         int heighestRow;
         bool foundHighest = false;
 
-        for (int = gameBoard.height() - 1; i >= 0; i--) {
+        for (int i = gameBoard.numRows() - 1; i >= 0; i--) {
             if (gameBoard[i][col] == '.') {
                 foundHighest = true;
             }
@@ -41,21 +51,23 @@ void Board::AddPieceToCol(char piece, int col) {
 
 void Board::TakePieceFromCol(int col) {
 
-    if (col < 0 || col > gameBoard.width() - 1) {
+    cout << numEmptyTilesInCols << endl;
+
+    if (col < 0 || col > gameBoard.numCols() - 1) {
         cerr << "Error: Out of Bounds" << endl;
         cerr << "Make sure col modified is between 0 and 6 inclusive" << endl;
     }
 
-    if (numEmptyTilesInCol[col] == gameBoard.height()) {
+    if (numEmptyTilesInCols[col] == gameBoard.numCols()) {
         cerr << "Error: Take away from Empty Column" << endl;
         cerr << "Make sure the col being removed from has >= 1 tile in it"
              << endl;
     }
 
-    int row = gameBoard.height() - numEmptyTiles[col] - 1;
+    int row = numEmptyTilesInCols[col];
     numEmptyTilesInCols[col]++;
 
-    gameBoard[row][col] == '.'
+    gameBoard[row][col] = '.';
 
     if (safeMode) {
         // Floating Piece check
@@ -63,7 +75,7 @@ void Board::TakePieceFromCol(int col) {
         int heighestRow;
         bool foundHighest = false;
 
-        for (int = gameBoard.height() - 1; i >= 0; i--) {
+        for (int i = gameBoard.numRows() - 1; i >= 0; i--) {
             if (gameBoard[i][col] == '.') {
                 foundHighest = true;
             }
@@ -71,5 +83,14 @@ void Board::TakePieceFromCol(int col) {
                 cerr << "Error: floating piece" << endl;
             }
         }
+    }
+}
+
+void Board::PrintBoard(ostream &out) const {
+    for (int i = 0; i < gameBoard.numRows(); i++) {
+        for (int j = 0; j < gameBoard.numCols(); j++) {
+            cout << gameBoard.get(i, j) << ' ';
+        }
+        cout << endl;
     }
 }
