@@ -17,3 +17,5 @@ ConnectFour::ConnectFour(char newWhitePlayer, char newBlackPlayer) {
     whitePlayer = newWhitePlayer;
     blackPlayer = newBlackPlayer;
 }
+
+
