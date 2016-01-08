@@ -67,14 +67,16 @@ public:
         safeMode = mode;
     }
 
-    void AddPieceToCol(char piece, int col);
+    int AddPieceToCol(char piece, int col);
         // the best way to interact with the board, it will "drop" the piece
         // into the specified column. This is the safe way to modify the board
         // and prevent errors from occurring
+        // NOTE: Returns the row that was modified
 
-    void TakePieceFromCol(int col);
+    int TakePieceFromCol(int col);
         // best way to remove a piece from the board. This is the safe way
         // to modify the board and prevent errors from occurring
+        // NOTE: returns the row that was modified
 
     // TODO add insecure ways to modify the board
 

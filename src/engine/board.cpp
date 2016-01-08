@@ -47,6 +47,8 @@ void Board::AddPieceToCol(char piece, int col) {
             }
         }
     }
+
+    return row;
 }
 
 void Board::TakePieceFromCol(int col) {
@@ -84,6 +86,8 @@ void Board::TakePieceFromCol(int col) {
             }
         }
     }
+
+    return row;
 }
 
 void Board::PrintBoard(ostream &out) const {
