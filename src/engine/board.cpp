@@ -19,7 +19,7 @@ Board::Board() {
     }
 }
 
-void Board::AddPieceToCol(char piece, int col) {
+int Board::AddPieceToCol(char piece, int col) {
 
     if (col < 0 || col > gameBoard.numCols() - 1) {
         cerr << "Error: Out of Bounds" << endl;
@@ -51,7 +51,7 @@ void Board::AddPieceToCol(char piece, int col) {
     return row;
 }
 
-void Board::TakePieceFromCol(int col) {
+int Board::TakePieceFromCol(int col) {
 
     cout << numEmptyTilesInCols << endl;
 

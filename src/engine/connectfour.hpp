@@ -11,6 +11,8 @@
 #pragma once
 #include "board.hpp"
 
+using namespace std;
+
 class ConnectFour {
 public:
     static const char UNDECIDED = 'U';
@@ -21,11 +23,15 @@ public:
     static const char DEFAULT_PLAYER_BLACK = '#';
 
     ConnectFour();
-    connectFour(char newWhitePlayer, char newBlackPlayer);
+    ConnectFour(char newWhitePlayer, char newBlackPlayer);
 
     int TakeTurn(char player, int col);
     int GetGameState() const {
         return gameState;
+    }
+
+    void PrintBoard(ostream &out) const {
+        connectFourBoard.PrintBoard(out);
     }
 private:
     Board connectFourBoard;
@@ -37,7 +43,7 @@ private:
     // Helper functions
     void updateGameState(int row, int col);
         // only checks pieces around the tile in parameters
-    void updateGameState()
+    void updateGameState();
         // checks the entire board
     char checkCols(int row, int col) const;
     char checkCols() const;
@@ -45,4 +51,6 @@ private:
     char checkRows() const;
     char checkDiags(int row, int col) const;
     char checkDiags() const;
+
+    char checkVector(const Vector<char> &vec) const;
 };

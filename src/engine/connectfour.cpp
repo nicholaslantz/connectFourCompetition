@@ -4,7 +4,9 @@
  * Date: <2016-01-08>
  */
 
-char checkVector(Vector<char> &vec);
+#include "connectfour.hpp"
+
+using namespace std;
 
 ConnectFour::ConnectFour() {
     connectFourBoard = Board();
@@ -30,59 +32,65 @@ int ConnectFour::TakeTurn(char player, int col) {
     }
 
     int colModified = col;
-    int rowModified = connectFourBoard.AddPieceToCol(col)
+    int rowModified = connectFourBoard.AddPieceToCol(player, col);
 
-    updateGameState(row, col);
+    updateGameState(rowModified, colModified);
+    if (playerTurn == WHITE) {
+        playerTurn = BLACK;
+    }
+    else {
+        playerTurn = WHITE;
+    }
 
     return gameState;
 }
 
 void ConnectFour::updateGameState(int row, int col) {
-    bool victory = false;
-    victory = checkCols(player, row, col);
+    char state = checkCols(row, col);
     //victory = checkRows(player, row, col);
     //victory = checkDiags(player, row, col);
 
-    if (victory) {
-        gameState = player;
-    }
+    gameState = state;
 }
 
-void ConnectFour::updateGameState(char player) {
+void ConnectFour::updateGameState() {
     bool victory = false;
-    victory = checkCols(player);
-    victory = checkRows(player);
-    victory = checkDiags(player);
+    victory = checkCols();
+    victory = checkRows();
+    victory = checkDiags();
 }
 
 char ConnectFour::checkCols(int row, int col) const {
     Vector<char> column = connectFourBoard.GetCol(col);
-    return checkVector(col);
+    return checkVector(column);
 }
 
-char ConnectFour::checkCols() {
+char ConnectFour::checkCols() const {
     return 'N';
 }
 
 char ConnectFour::checkRows(int row, int col) const {
-    return 'N'
+    return 'N';
 }
 char ConnectFour::checkRows() const {
-    return 'N'
+    return 'N';
 }
 
 char ConnectFour::checkDiags(int row, int col) const {
-    return 'N'
+    return 'N';
 }
 
 char ConnectFour::checkDiags() const {
-    return 'N'
+    return 'N';
 }
 
-char checkVector(Vector<char> &vec) {
-    int length = 0; char oldToken = column[0];
-    for (int i = 1; i < column.size(); i++) {
-        newToken = column[i]
+char ConnectFour::checkVector(const Vector<char> &vec) const {
+    cout << vec << endl;
+    cout << "NEW" << endl;
+    int length = 1; char oldToken = vec[vec.size()-1];
+    for (int i = vec.size()-2; i >= 0; i--) {
+        cout << length << ", ";
+        char newToken = vec[i];
         if (newToken == '.') {
             return 'U';
         }
@@ -96,5 +104,6 @@ char checkVector(Vector<char> &vec) {
             length = 1;
         }
     }
+    cout << endl;
     return 'U';
 }
