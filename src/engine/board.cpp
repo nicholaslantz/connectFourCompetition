@@ -90,6 +90,48 @@ int Board::TakePieceFromCol(int col) {
     return row;
 }
 
+Vector<char> Board::GetDiagPos(int row, int col) const {
+    /* first, find the most upper-right position on board relative to
+     * the given coordinate
+     */
+
+    Vector<char> response;
+
+    // the following isn't obvious, draw it out if you want figure out why
+    int x = col + row; int y = 0;
+    if (x > gameBoard.numCols()-1) {
+        y += x - (gameBoard.numCols()-1);
+        x = gameBoard.numCols()-1;
+    }
+
+    while (gameBoard.inBounds(y, x)) { 
+        response.add(gameBoard.get(y, x));
+        x--;
+        y++;
+    }
+
+    return response;
+}
+
+Vector<char> Board::GetDiagNeg(int row, int col) const {
+    Vector<char> response;
+
+    // same story as above, just trust me
+    int y = row - col; int x = 0;
+    if (y < 0) {
+        x += -1 * y;
+        y = 0;
+    }
+
+    while (gameBoard.inBounds(y, x)) {
+        response.add(gameBoard.get(y, x));
+        x++;
+        y++;
+    }
+
+    return response;
+}
+
 void Board::PrintBoard(ostream &out) const {
     for (int i = 0; i < gameBoard.numRows(); i++) {
         for (int j = 0; j < gameBoard.numCols(); j++) {

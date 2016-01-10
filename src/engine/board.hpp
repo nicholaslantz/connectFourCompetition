@@ -53,6 +53,14 @@ public:
         return response;
     }
 
+    /* the "pos" and "neg" refers to positive and negative. Positive means a
+     * positive slope in a 2D plane, like the function y = x. It goes from
+     * bottom-left to top-right. Negative uses the alternative orientatation
+     * corresponding to y = -x
+     */
+    Vector<char> GetDiagPos(int row, int col) const;
+    Vector<char> GetDiagNeg(int row, int col) const;
+
     Grid<char> GetBoard() const {
         // useful if one wants to operate on the Grid directly instead of going
         // through this class
