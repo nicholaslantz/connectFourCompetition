@@ -6,7 +6,9 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-    GameManager game(GameManager::USER_INTERFACE, GameManager::USER_INTERFACE);
+    srand(time(NULL));
+
+    GameManager game(1, 1);
 
     game.PlayGame();
 

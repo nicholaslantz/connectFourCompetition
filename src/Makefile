@@ -3,7 +3,8 @@
 CFLAGS=-std=c++11
 LIBS=/usr/local/lib/libStanfordCPPLib.a
 OBJECTS = main.o engine/board.o engine/connectfour.o engine/interface.o \
-	userinterface/userinterface.o engine/gamemanager.o
+	interfaces/userinterface/userinterface.o interfaces/randomai/randomai.o \
+    engine/gamemanager.o
 
 
 CC=g++ 

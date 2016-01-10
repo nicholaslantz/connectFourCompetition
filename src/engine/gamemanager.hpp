@@ -14,7 +14,8 @@
  */
 
 #include "connectfour.hpp"
-#include "../userinterface/userinterface.hpp"
+#include "../interfaces/userinterface/userinterface.hpp"
+#include "../interfaces/randomai/randomai.hpp"
 
 class GameManager {
 public:
@@ -23,6 +24,7 @@ public:
     static const int USER_INTERFACE = 1;
     static const int NLANTZ_AI = 2;
     static const int LUCKCOW_AI = 3;
+    static const int RANDOM_AI = 4;
 
 
     GameManager(int interface1, int interface2);

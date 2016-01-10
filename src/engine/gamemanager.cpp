@@ -11,6 +11,7 @@ GameManager::GameManager(int interface1, int interface2) {
     switch (interface1) {
         case USER_INTERFACE:
             player1 = new UserInterface(&game);
+            cout << "USER" << endl;
             break;
         case NLANTZ_AI:
             //player1 = new NlantzAI(&game);
@@ -18,6 +19,10 @@ GameManager::GameManager(int interface1, int interface2) {
         case LUCKCOW_AI:
             //player1 = new LuckcowAI(&game);
             //break;
+        case RANDOM_AI:
+            cout << "RANDOM" << endl;
+            player1 = new RandomAI(&game);
+            break;
         default:
             cerr << "Error: Interface code not implemented" << endl;
     }
@@ -32,6 +37,9 @@ GameManager::GameManager(int interface1, int interface2) {
         case LUCKCOW_AI:
             //player2 = new LuckcowAI(&game);
             //break;
+        case RANDOM_AI:
+            player1 = new RandomAI(&game);
+            break;
         default:
             cerr << "Error: Interface code not implemented" << endl;
     }
@@ -39,6 +47,9 @@ GameManager::GameManager(int interface1, int interface2) {
 
 char GameManager::PlayGame() {
     char gameState = ConnectFour::UNDECIDED;
+
+    cout << ConnectFour::WHITE;
+    cout << ConnectFour::BLACK;
 
     while (gameState == ConnectFour::UNDECIDED) {
         gameState = PlayRound();
@@ -49,16 +60,15 @@ char GameManager::PlayGame() {
 
 char GameManager::PlayRound() {
 
-    char gameState = '!';
+    char gameState = '\t';
     do {
         player1->TakeTurn();
         char gameState = game.GetGameState();
         cout << gameState << endl;
     } while (gameState == ConnectFour::ILLEGAL_MOVE);
 
-    cout << gameState << " ...?" << endl;
-
-    if (gameState != ConnectFour::UNDECIDED) {
+    if (gameState == ConnectFour::WHITE ||
+        gameState == ConnectFour::BLACK) {
         return gameState;
     }
     
