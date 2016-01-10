@@ -28,6 +28,12 @@ char ConnectFour::TakeTurn(int col) {
     int colModified = col;
     int rowModified = connectFourBoard.AddPieceToCol(playerTurn, col);
 
+    if (rowModified == -1) {
+        // Illegal move, most likely addition to full column
+        gameState = ILLEGAL_MOVE;
+        return ILLEGAL_MOVE;
+    }
+
     updateGameState(rowModified, colModified);
     updatePlayerTurn();
 
@@ -43,6 +49,12 @@ char ConnectFour::TakeTurn(char player, int col) {
 
     int colModified = col;
     int rowModified = connectFourBoard.AddPieceToCol(player, col);
+
+    if (rowModified == -1) {
+        // Illegal move, most likely addition to full column
+        gameState = ILLEGAL_MOVE;
+        return ILLEGAL_MOVE;
+    }
 
     updateGameState(rowModified, colModified);
     updatePlayerTurn();

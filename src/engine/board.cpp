@@ -24,7 +24,16 @@ int Board::AddPieceToCol(char piece, int col) {
     if (col < 0 || col > gameBoard.numCols() - 1) {
         cerr << "Error: Out of Bounds" << endl;
         cerr << "Make sure col modified is between 0 and 6 inclusive" << endl;
+        return -1;
     }
+
+    if (numEmptyTilesInCols[col] == 0) {
+        // Soft error, this will happen occasionally in normal
+        // gameplay, don't scream at the user
+        return -1;
+    }
+
+    
 
     int row = numEmptyTilesInCols[col] - 1;
     numEmptyTilesInCols[col]--;

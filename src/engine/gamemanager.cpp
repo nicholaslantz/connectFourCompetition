@@ -49,17 +49,24 @@ char GameManager::PlayGame() {
 
 char GameManager::PlayRound() {
 
-    player1->TakeTurn();
-    char gameState = game.GetGameState();
-    cout << gameState << endl;
+    char gameState = '!';
+    do {
+        player1->TakeTurn();
+        char gameState = game.GetGameState();
+        cout << gameState << endl;
+    } while (gameState == ConnectFour::ILLEGAL_MOVE);
+
+    cout << gameState << " ...?" << endl;
 
     if (gameState != ConnectFour::UNDECIDED) {
         return gameState;
     }
-
-    player2->TakeTurn();
-    gameState = game.GetGameState();
-    cout << gameState << endl;
+    
+    do {
+        player2->TakeTurn();
+        gameState = game.GetGameState();
+        cout << gameState << endl;
+    } while (gameState == ConnectFour::ILLEGAL_MOVE);
 
     return gameState;
 }

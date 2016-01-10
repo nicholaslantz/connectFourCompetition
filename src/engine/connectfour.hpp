@@ -18,6 +18,7 @@ public:
     static const char UNDECIDED = 'U';
     static const char WHITE = '@';
     static const char BLACK = '#';
+    static const char ILLEGAL_MOVE = '!';
 
     static const char DEFAULT_PLAYER_WHITE = '@';
     static const char DEFAULT_PLAYER_BLACK = '#';
