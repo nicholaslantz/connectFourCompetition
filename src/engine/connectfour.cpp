@@ -85,6 +85,8 @@ char ConnectFour::checkCols() const {
 
 char ConnectFour::checkRows(int row, int col) const {
     Vector<char> rowData = connectFourBoard.GetRow(row);
+
+
     return checkVector(rowData);
 }
 char ConnectFour::checkRows() const {
@@ -112,57 +114,26 @@ char ConnectFour::checkDiags() const {
 }
 
 char ConnectFour::checkVector(const Vector<char> &vec) const {
-    int length = 1; char oldToken = vec[vec.size()-1];
-        // start at bottom, those are more likely to contain 4 in a row
+    // The following is embarrasing, I couldn't get my search function to work
+    // properly, so I just used the string's search. It's called being
+    // resourceful ;P
 
-    for (int i = vec.size()-2; i >= 0; i--) {
-        // the following could be improved by breaking the loop once the
-        // halfway mark is reached. It adds more condition checking, so it
-        // will slow the loop iterations down, so it may increase time. Someone
-        // can test later if desired.
-
-        char newToken = vec[i];
-        if (newToken == oldToken) {
-            length++;
-            if (length == 4) {
-                // there's a weird error where it's returning '.' as winning,
-                // I'm going to add a check and have the loop break if it comes
-                // up with ',' as having length of 4
-                if (newToken != DEFAULT_SPACE) {
-                    return newToken;
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        else {
-            length = 0;
-        }
+    string data = "";
+    string p1(""), p2("");
+    for(int i = 0; i < vec.size(); i++) {
+        data += vec[i];
     }
-    
+    for(int i = 0; i < 4; i++) {
+        p1 += WHITE;
+        p2 += BLACK;
+    }
+
+    if (data.find(p1) != string::npos) {
+        return WHITE;
+    }
+    else if (data.find(p2) != string::npos) {
+        return BLACK;
+    }
+
     return UNDECIDED;
-
-    /* The following only works for checking columns, it assumes that if a
-     * empty space is found, there are no more tiles above it, which is not
-     * necessarily true for diagonals and rows
-     *
-    int length = 1; char oldToken = vec[vec.size()-1];
-    for (int i = vec.size()-2; i >= 0; i--) {
-        cout << length << ", ";
-        char newToken = vec[i];
-        if (newToken == '.') {
-            return 'U';
-        }
-        if (newToken == oldToken) {
-            length++;
-            if (length == 4) {
-                return newToken;
-            }
-        }
-        else {
-            length = 1;
-        }
-    }
-    */
 }

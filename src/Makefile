@@ -18,3 +18,4 @@ all: $(OBJECTS)
 
 clean:
 	$(RM) `find . | grep -F .o`
+	$(RM) ConnectFour
