@@ -112,7 +112,6 @@ char ConnectFour::checkDiags() const {
 }
 
 char ConnectFour::checkVector(const Vector<char> &vec) const {
-    cout << vec << endl;
     int length = 1; char oldToken = vec[vec.size()-1];
         // start at bottom, those are more likely to contain 4 in a row
 
