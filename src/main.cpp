@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, char **argv) {
     srand(time(NULL));
 
-    GameManager game(1, 1);
+    GameManager game(1, GameManager::RANDOM_AI);
 
     game.PlayGame();
 

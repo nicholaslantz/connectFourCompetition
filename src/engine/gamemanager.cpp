@@ -38,7 +38,7 @@ GameManager::GameManager(int interface1, int interface2) {
             //player2 = new LuckcowAI(&game);
             //break;
         case RANDOM_AI:
-            player1 = new RandomAI(&game);
+            player2 = new RandomAI(&game);
             break;
         default:
             cerr << "Error: Interface code not implemented" << endl;
@@ -63,7 +63,7 @@ char GameManager::PlayRound() {
     char gameState = '\t';
     do {
         player1->TakeTurn();
-        char gameState = game.GetGameState();
+        gameState = game.GetGameState();
         cout << gameState << endl;
     } while (gameState == ConnectFour::ILLEGAL_MOVE);
 
